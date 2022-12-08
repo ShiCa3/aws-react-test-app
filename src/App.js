@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import logo from './ShiCa2_face.svg';
 import './App.css';
 
 function App() {
@@ -18,6 +18,7 @@ function App() {
           Learn React
         </a>
       </header>
+	  <h1>Hello world</h1>
     </div>
   );
 }
