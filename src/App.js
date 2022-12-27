@@ -50,16 +50,33 @@ function App() {
 				<a href="https://lit.link/ShiCa">
 	        		<img src={logo} className="App-logo" alt="logo" />
 				</a>
-			<h1>シカくんToDoリスト</h1>
-			<p>
-				タスクを追加すると、シカくんが覚えてくれるよ！<br/>
-				サイトを離れたり更新したりする、ToDoリストを綺麗さっぱり忘れるよ！
-			</p>
-			<TodoList todos={todos} toggleTodo={toggleTodo} />
-			<input type="text" ref={todoNameRef} />
-			<button onClick={handleAddTodo}>タスクを追加</button>
-			<button onClick={handleClear}>完了したタスクの削除</button>
-			<div>残りのタスク:{todos.filter((todo) => !todo.completed).length}</div>
+
+				<h1>シカくんにコーヒーを買ってあげる</h1>
+				<div>
+					<label>お名前</label>
+					<input type="text" />
+				</div>
+				<div>
+					<label>メッセージ</label><br/>
+       		        <textarea
+                	  rows={3}
+                	  placeholder="Enjoy your coffee!"
+                	>
+                	</textarea>
+				</div>
+				<button>お財布接続(Metamask)</button>
+				<button>コーヒー 0.001ETH(test)</button>
+
+				<h1>シカくんToDoリスト</h1>
+				<p>
+					タスクを追加すると、シカくんが覚えてくれるよ！<br/>
+					サイトを離れたり更新したりする、ToDoリストを綺麗さっぱり忘れるよ！
+				</p>
+				<TodoList todos={todos} toggleTodo={toggleTodo} />
+				<input type="text" ref={todoNameRef} />
+				<button onClick={handleAddTodo}>タスクを追加</button>
+				<button onClick={handleClear}>完了したタスクの削除</button>
+				<div>残りのタスク:{todos.filter((todo) => !todo.completed).length}</div>
 			</header>
 		</div>
 	);
