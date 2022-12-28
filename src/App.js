@@ -1,26 +1,73 @@
+import abi from './BuyMeACoffee.json';
+import { ethers } from "ethers";
 import logo from './ShiCa2_face.svg';
 import './App.css';
 import {useState, useRef} from "react";
 import TodoList from "./TodoList";
 import { v4 as uuidv4} from "uuid";
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-// 		<a href="https://lit.link/ShiCa">
-// 	        <img src={logo} className="App-logo" alt="logo" />
-// 		</a>
-//       </header>
-// 	  <h1>Hello ShiCa</h1>
-//     </div>
-//   );
-// }
+
 
 function App() { 
+	const contractAddress = "0x084E2A12b01EDc13543156A7A498C8D95fa1712D";
+	const contractABI = abi.abi;
+
+	const [currentAccount, setCurrentAccount] = useState("");
+	const [errorMessage, setErrorMessage] = useState("");
+	const [name, setName] = useState("");
+	const [message, setMessage] = useState("");
+
 	const [todos, setTodos] = useState([]);
 
 	const todoNameRef = useRef();
+
+	// メタマスクウォレット接続
+	const connectWallet = () => {
+		window.ethereum
+		.request({ method: "eth_requestAccounts" })
+		.then((result) => {
+			currentAccount(result[0]);
+		})
+		.catch((error) => {
+		  setErrorMessage(error.message);
+		});
+	}
+
+	// コーヒー購入ボタン
+	const buyCoffee = async () => {
+		try {
+		  const {ethereum} = window;
+	
+		  if (ethereum) {
+			const provider = new ethers.providers.Web3Provider(ethereum, "any");
+			const signer = provider.getSigner();
+			const buyMeACoffee = new ethers.Contract(
+			  contractAddress,
+			  contractABI,
+			  signer
+			);
+	
+			console.log("buying coffee..")
+			const coffeeTxn = await buyMeACoffee.buyCoffee(
+			  name ? name : "anon",
+			  message ? message : "Enjoy your coffee!",
+			  {value: ethers.utils.parseEther("0.001")}
+			);
+	
+			await coffeeTxn.wait();
+	
+			console.log("mined ", coffeeTxn.hash);
+	
+			console.log("coffee purchased!");
+	
+			// Clear the form fields.
+			setName("");
+			setMessage("");
+		  }
+		} catch (error) {
+		  console.log(error);
+		}
+	};
 
 	const handleAddTodo = () => {
 		//タスクを追加する
@@ -64,8 +111,8 @@ function App() {
                 	>
                 	</textarea>
 				</div>
-				<button>お財布接続(Metamask)</button>
-				<button>コーヒー 0.001ETH(test)</button>
+				<button onClick={connectWallet}>お財布接続(Metamask)</button>
+				<button onClick={buyCoffee}>コーヒー 0.001ETH(test)</button>
 
 				<h1>シカくんToDoリスト</h1>
 				<p>
