@@ -98,7 +98,7 @@ function App() {
 	        		<img src={logo} className="App-logo" alt="logo" />
 				</a>
 
-				<h1>シカくんにコーヒーを買ってあげる</h1>
+				<h1>シカくんにコーヒーを買ってあげる(Beta)</h1>
 				<div>
 					<label>お名前</label>
 					<input type="text" />
@@ -112,7 +112,17 @@ function App() {
                 	</textarea>
 				</div>
 				<button onClick={connectWallet}>お財布接続(Metamask)</button>
-				<button onClick={buyCoffee}>コーヒー 0.001ETH(test)</button>
+				<button onClick={buyCoffee}>コーヒー 0.001ETH(Goerli Test Network)</button>
+				<p>
+					シカくんにコーヒーを買ってあげる手順<br/>
+					1.chromeでMetamaskの拡張機能をインストールする<br/>
+					2.Metamaskのアカウントを作成する<br/>
+					3.MetamaskのネットワークをGoerli Test Networkに切り替える<br/>
+					4.GoerliのETHを入手する(Goerli Faucet)<br/>
+					5.お財布接続ボタンを押して、Metamaskと、このwebサイトを接続する<br/>
+					6.コーヒーのボタンを押す<br/>
+					7.お名前とメッセージはまだ反映されません<br/>
+				</p>
 
 				<h1>シカくんToDoリスト</h1>
 				<p>
